@@ -1,7 +1,7 @@
 # Личный проект «YetiCave»
 
 * Студент: [Damir Sarkulin](https://up.htmlacademy.ru/php/4/user/615305).
-* Наставник: [Игорь Антонов](https://htmlacademy.ru/profile/antonov) .
+* Наставник: [Игорь Антонов](https://htmlacademy.ru/profile/antonov).
 
 ---
 
