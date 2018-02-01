@@ -37,7 +37,7 @@ $user_avatar = 'img/user.jpg';
         <p><?=$user_name?></p>
         </div>
         </nav>
-    </div>
+        </div>
         <?php else: ?>
         <ul class="user-menu__list">
         <li class="user-menu__item">
@@ -46,7 +46,7 @@ $user_avatar = 'img/user.jpg';
         <li class="user-menu__item">
           <a href="#">Вход</a>
         </li>
-      </ul>
+        </ul>
         <?php endif; ?>
         
 </header>
