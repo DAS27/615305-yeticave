@@ -137,7 +137,6 @@ $num_count = count($categories);
                             <span><?=$item['price'];?><b class="rub">р</b></span>
                         </div>
                         <div class="lot__timer timer">
-
                         </div>
                     </div>
                 </div>
