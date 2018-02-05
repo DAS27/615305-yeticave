@@ -12,31 +12,31 @@ $ads_list = [
         'price' => '10999',
         'img_url' => 'img/lot-1.jpg'
     ],
-    1 => [
+    [
         'name' => 'DC Ply Mens 2016/2017 Snowboard',
         'category' => 'Доски и лыжи',
         'price' => '159999',
         'img_url' => 'img/lot-2.jpg'
     ],
-    2 => [
+    [
         'name' => 'Крепления Union Contact Pro 2015 года размер L/XL',
         'category' => 'Крепления',
         'price' => '8000',
         'img_url' => 'img/lot-3.jpg'
     ],
-    3 => [
+    [
         'name' => 'Ботинки для сноуборда DC Mutiny Charocal',
         'category' => 'Ботинки',
         'price' => '10999',
         'img_url' => 'img/lot-4.jpg'
     ],
-    4 => [
+    [
         'name' => 'Куртка для сноуборда DC Mutiny Charocal',
         'category' => 'Одежда',
         'price' => '7500',
         'img_url' => 'img/lot-5.jpg'
     ],
-    5 => [
+    [
         'name' => 'Маска Oakley Canopy',
         'category' => 'Разное',
         'price' => '5400',
@@ -123,18 +123,18 @@ $num_count = count($categories);
             <h2>Открытые лоты</h2>
         </div>
         <ul class="lots__list">
-            <?php foreach ($ads_list as $key => $item): ?>
+            <?php foreach ($ads_list as $item): ?>
             <li class="lots__item lot">
                 <div class="lot__image">
                     <img src="<?=$item['img_url'];?>" width="350" height="260" alt="">
                 </div>
                 <div class="lot__info">
-                    <span><?=$item['name'];?></span>
-                    <h3><?=$item['category']; ?><a class="text-link" href="lot.html"></a></h3>
+                    <span><?=$item['category'];?></span>
+                    <h3><a class="text-link" href="lot.html"><?=$item['name']; ?></a></h3>
                     <div class="lot__state">
                         <div class="lot__rate">
                             <span class="lot__amount">Стартовая цена</span>
-                            <span><?=$item['price'];?><b class="rub">р</b></span>
+                            <span class="lot__cost"><?=$item['price'];?><b class="rub">р</b></span>
                         </div>
                         <div class="lot__timer timer">
                         </div>
@@ -148,11 +148,11 @@ $num_count = count($categories);
 
 <footer class="main-footer">
     <nav class="nav">
-        <ul class="nav__list container">
-        <?php while($index < $num_count): ?>
-        <a href="/?cat=<?=$index;?>"><?=$categories[$index];?></a>
-        <?php $index = $index +1; ?>
-        <?php endwhile; ?>
+        <ul class="nav__list container nav__item">
+            <?php while($index < $num_count): ?>
+            <a href="/?cat=<?=$index;?>"><?=$categories[$index];?></a>
+            <?php $index = $index +1; ?>
+            <?php endwhile; ?>
         </ul>
     </nav>
     <div class="main-footer__bottom container">
