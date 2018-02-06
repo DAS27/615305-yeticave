@@ -6,7 +6,7 @@ $user_avatar = 'img/user.jpg';
 
 $categories = ['Доски и лыжи', 'Крепления', 'Ботинки', 'Одежда', 'Инструменты', 'Разное'];
 $ads_list = [
-    0 => [
+    [
         'name' => '2014 Rossignol District Snowboard',
         'category' => 'Доски и лыжи',
         'price' => '10999',
@@ -43,8 +43,6 @@ $ads_list = [
         'img_url' => 'img/lot-6.jpg'
     ]
     ];
-$index = 0;
-$num_count = count($categories);
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -149,10 +147,11 @@ $num_count = count($categories);
 <footer class="main-footer">
     <nav class="nav">
         <ul class="nav__list container nav__item">
-            <?php while($index < $num_count): ?>
-            <a href="/?cat=<?=$index;?>"><?=$categories[$index];?></a>
-            <?php $index = $index +1; ?>
-            <?php endwhile; ?>
+                <?php foreach ($categories as $key): ?>
+            <li class="nav__item">
+                <a href="all-lost.html"><?php print($key); ?></a>
+            </li>
+                <?php endforeach; ?>
         </ul>
     </nav>
     <div class="main-footer__bottom container">
