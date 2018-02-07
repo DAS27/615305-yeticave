@@ -43,6 +43,13 @@ $ads_list = [
         'img_url' => 'img/lot-6.jpg'
     ]
     ];
+function format_price($price) {
+    $ceil_price=ceil($price);
+    if ($ceil_price > 1000) {
+        $ceil_price = number_format($ceil_price, 0, '', ' ');
+    }
+    return $ceil_price. ' &#8381';
+};
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -132,7 +139,7 @@ $ads_list = [
                     <div class="lot__state">
                         <div class="lot__rate">
                             <span class="lot__amount">Стартовая цена</span>
-                            <span class="lot__cost"><?=$item['price'];?><b class="rub">р</b></span>
+                            <span class="lot__cost"><?=format_price($item['price']);?></span>
                         </div>
                         <div class="lot__timer timer">
                         </div>
