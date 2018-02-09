@@ -13,5 +13,3 @@ $layout_content = renderTemplate('templates/layout.php',
  'user_avatar' => $user_avatar
 ]);
 print($layout_content);
-
-?>
