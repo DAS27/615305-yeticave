@@ -1,7 +1,7 @@
 <?php
 require_once 'functions.php';
 require_once 'data.php';
-
+date_default_timezone_set("Europe/Moscow");
 $page_content = renderTemplate('templates/index.php', ['ads_list' => $ads_list]); 
 
 $layout_content = renderTemplate('templates/layout.php', 
