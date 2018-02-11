@@ -1,10 +1,11 @@
 <?php
 require_once 'functions.php';
 require_once 'data.php';
-date_default_timezone_set("Europe/Moscow");
-$page_content = renderTemplate('templates/index.php', ['ads_list' => $ads_list]); 
 
-$layout_content = renderTemplate('templates/layout.php', 
+
+$page_content = render_template('index', ['ads_list' => $ads_list]);
+
+$layout_content = render_template('layout',
 ['content' => $page_content,
  'title' => 'YetiCave - Интернет-аукцион для сноубордического и горнолыжного снаряжения.',
  'categories' => $categories,
