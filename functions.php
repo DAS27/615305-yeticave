@@ -1,9 +1,5 @@
 <?php
-
-date_default_timezone_set('Europe/Moscow');
-
-define('TEMPLATE_DIR_PATH', 'templates/');
-define('TEMPLATE_EXT', '.php');
+require_once ('config.php'); // Подключает константы
 
 function format_price($price) { // Округляет и форматирует цену
     $ceil_price=ceil($price);
@@ -24,4 +20,15 @@ function render_template(string $template_name, array $data) { // Подключ
     }
 
 	return '';
-}
+};
+
+function lot_time() { // Время жизни лота
+    $ts = time();
+    $ts_to_midnight = strtotime('tomorrow');
+    $seconds_to_midnight = $ts_to_midnight - $ts;
+    
+    $hours = floor($seconds_to_midnight / 3600);
+    $minutes = floor(($seconds_to_midnight % 3600) / 60);
+
+    return "$hours : $minutes";
+};
