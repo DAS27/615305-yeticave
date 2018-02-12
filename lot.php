@@ -1,4 +1,5 @@
 <?php   
+require_once 'functions.php';
 require_once 'data.php';
 
 $lots = null;
@@ -17,7 +18,7 @@ if (!$lots) {
 	http_response_code(404);
 }
 
-$page_content = render_template('index', ['lots_list' => $lots_list]);
+$page_content = render_template('lot', ['lots_list' => $lots_list]);
 
 $layout_content = render_template('layout',
 ['content' => $page_content,
