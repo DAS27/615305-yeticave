@@ -28,11 +28,11 @@
             <h2>Открытые лоты</h2>
         </div>
         <ul class="lots__list">
-            <?php foreach ($ads_list as $item): ?>
+            <?php foreach ($lots_list as $item): ?>
                 <li class="lots__item lot">
                     <div class="lot__image">
                         <img src="<?=$item['img_url'];?>" width="350" height="260" alt="">
-                </div>
+                    </div>
                 <div class="lot__info">
                     <span><?=$item['category'];?></span>
                         <h3><a class="text-link" href="lot.html"><?=$item['name']; ?></a></h3>
