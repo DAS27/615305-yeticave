@@ -3,7 +3,7 @@ require_once 'functions.php';
 require_once 'data.php';
 
 
-$page_content = render_template('index', ['ads_list' => $ads_list]);
+$page_content = render_template('index', ['lots_list' => $lots_list]);
 
 $layout_content = render_template('layout',
 ['content' => $page_content,
