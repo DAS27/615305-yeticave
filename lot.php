@@ -1,14 +1,14 @@
 <?php   
+require_once 'config.php';
 require_once 'functions.php';
 require_once 'data.php';
 
-$lots = null;
+$lots_list = null;
 
-if (isset($_GET['lots_id'])) {
-    $lots_id = $_GET['lots_id'];
-        foreach ($lots_list as $item) {
-        if ($item['id'] == $lots_id) {
-            $lots=$item;
+if (isset($_GET['id'])) {
+    foreach ($lots_list as $id => $item) {
+        if ($id == $_GET['id']) {
+            $lots_list=$item;
         break;
         }
     }
