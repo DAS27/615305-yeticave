@@ -22,7 +22,7 @@ function render_template(string $template_name, array $data) { // Подключ
 	return '';
 };
 
-function lot_time() { // Время жизни лота
+function get_lot_time() { // Время жизни лота
     $ts = time();
     $ts_to_midnight = strtotime('tomorrow');
     $seconds_to_midnight = $ts_to_midnight - $ts;
