@@ -6,15 +6,15 @@ $lot = null;
 
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
-    foreach ($lots as $item) {
-        if ($id = $item) {
+    foreach ($lots as $key => $item) {
+        if ($key == $id) {
             $lot = $item;
         break;
         }
     }
 }
 
-if (!$lots) {
+if (!$lot) {
 	http_response_code(404);
 }
 
