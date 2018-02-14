@@ -1,12 +1,12 @@
 <section class="lot-item container">
     <?php if (isset($lot)): ?>
-    <h2><?=$lots['name']; ?></h2>
+    <h2><?=$lot['name']; ?></h2>
     <div class="lot-item__content">
       <div class="lot-item__left">
         <div class="lot-item__image">
-          <img src="<?=$lots['image']; ?>" width="730" height="548" alt="">
+          <img src="<?=$lot['image']; ?>" width="730" height="548" alt="">
         </div>
-        <p class="lot-item__category">Категория: <span><?=$lots['category']; ?></span></p>
+        <p class="lot-item__category">Категория: <span><?=$lot['category']; ?></span></p>
         <p class="lot-item__description"></p>
       </div>
       <div class="lot-item__right">
@@ -17,7 +17,7 @@
           <div class="lot-item__cost-state">
             <div class="lot-item__rate">
               <span class="lot-item__amount">Текущая цена</span>
-              <span class="lot-item__cost"><?=format_price($lots['price']); ?></span>
+              <span class="lot-item__cost"><?=format_price($lot['price']); ?></span>
             </div>
             <div class="lot-item__min-cost">
               Мин. ставка <span>12 000 р</span>
