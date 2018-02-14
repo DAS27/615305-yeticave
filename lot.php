@@ -2,7 +2,7 @@
 require_once 'functions.php';
 require_once 'data.php';
 
-$lot = 'null';
+$lot = null;
 
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
