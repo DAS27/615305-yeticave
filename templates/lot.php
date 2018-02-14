@@ -1,13 +1,13 @@
 <section class="lot-item container">
-    <?php if (isset($lots_list)): ?>
-    <h2><?=htmlspecialchars($item['name']);?></h2>
+    <?php if (isset($lot)): ?>
+    <h2><?=$lots['name']; ?></h2>
     <div class="lot-item__content">
       <div class="lot-item__left">
         <div class="lot-item__image">
-          <img src="<?=$item['img_url'];?>" width="730" height="548" alt="">
+          <img src="<?=$lots['image']; ?>" width="730" height="548" alt="">
         </div>
-        <p class="lot-item__category">Категория: <span><?=$item['category']?></span></p>
-        <p class="lot-item__description"><?=$item['message'];?></p>
+        <p class="lot-item__category">Категория: <span><?=$lots['category']; ?></span></p>
+        <p class="lot-item__description"></p>
       </div>
       <div class="lot-item__right">
         <div class="lot-item__state">
@@ -17,7 +17,7 @@
           <div class="lot-item__cost-state">
             <div class="lot-item__rate">
               <span class="lot-item__amount">Текущая цена</span>
-              <span class="lot-item__cost"><?=htmlspecialchars(format_price($item['price']));?></span>
+              <span class="lot-item__cost"><?=format_price($lots['price']); ?></span>
             </div>
             <div class="lot-item__min-cost">
               Мин. ставка <span>12 000 р</span>
@@ -89,6 +89,6 @@
       </div>
     </div>
     <?php else: ?>
-        <h1>Гифка с этим ID не найдена</h1>
+        <h1 style="color: black">Страница с таким товаром не найдена</h1>
     <?php endif; ?>
-</section>
+  </section>
