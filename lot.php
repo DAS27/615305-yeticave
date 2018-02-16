@@ -6,14 +6,13 @@ $lot = null;
 
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
-    foreach ($lots as $key => $item) {
-        if ($key == $id) {
-        
-            $lot = $item;
-        break;
-        }
+
+    $search_id = array('id' => $id);
+    if (array_key_exists('id', $search_id)) {
+        $lot = $item;
     }
 }
+
 
 if ($lot === null) {
 	http_response_code(404);
