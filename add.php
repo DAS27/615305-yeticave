@@ -5,19 +5,20 @@ require_once 'data.php';
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $lot = $_POST;
 
-    $required = ['name', 'description', 'image', 'category', 'lot-rate', 'step-lot', 'end-date'];
-    $dict = ['name' => 'Название', 'category' => 'Категории', 'description' => 'Описание', 'image' => 'Изображение', 'lot-rate' => 'Начальная цена', 'step-lot' => 'Шаг ставки', 'end-date-lot' => 'Дата окончания торгов'];
+    $required = ['lot-name'];
+    $dict = ['lot-name' => 'Наименование'];
     $errors = [];
-    foreach ($required as $key) {
+
+    foreach ($_POST as $key) {
         if (empty($_POST[$key])) {
-            $errors[$key] = 'Заполните это поле';
+            $errors[$dict[$key]] = 'Это поле надо заполнить!';
+            }
         }
-    }
     
     if (isset($_FILES['image']['name'])) {
         $tmp_name = $_FILES['image']['tmp_name'];
         $path = $_FILES['image']['name'];
-
+    
         $finfo = finfo_open(FILEINFO_MIME_TYPE);
         $file_type = finfo_file($finfo, $tmp_name);
         if ($file_type !== "image/jpg") {
@@ -29,18 +30,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
     }
     else {
-        $errors['file'] = 'Вы не загрузили файл';
+        $errors['file'] = 'Вы не загрузили файл!';
     }
     if (count($errors)) {
-        $page_content = render_template('add', ['lot' => $lot, 'errors' => $errors, 'dict' => $dict]);
+        $page_content = rander_template('add', ['lot' => $lot, 'errors' => $errors, 'dict' => $dict]);
     }
     else {
-        $page_content = render_template('lot', ['lot' => $lot]);
+        $page_content = rander_template('lot', ['lot' => $lot]);
     }
 }
-else {
-    $page_content = render_template('add', []);
-}
+
+$page_content = render_template('add', []);
 
 $layout_content = render_template('layout',
 ['content' => $page_content,
@@ -50,4 +50,5 @@ $layout_content = render_template('layout',
  'user_name' => $user_name,
  'user_avatar' => $user_avatar
 ]);
+
 print($layout_content);
