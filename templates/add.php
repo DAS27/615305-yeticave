@@ -1,11 +1,11 @@
-<form class="form form--add-lot container <?php print (isset($isset) ? 'form--invalid' : ''); ?> " action="add.php" method="post" enctype="multipart/form-data" > <!-- form--invalid -->
+<form class="form form--add-lot container form--invalid <?php print (isset($isset) ? 'form--invalid' : ''); ?> " action="add.php" method="post" enctype="multipart/form-data" > <!-- form--invalid -->
     <h2>Добавление лота</h2>
     <div class="form__container-two">
     <?php $class_name = isset($errors['lot-name']) ? 'form__item--invalid' : '';
             $value = isset($lot['lot-name']) ? $lot['lot-name'] : ""; ?>
       <div class="form__item <?=$class_name; ?>"> <!-- form__item--invalid -->
         <label for="lot-name">Наименование</label>
-        <input id="lot-name" type="text" name="lot-name" placeholder="Введите наименование лота" value="<?php $value; ?>">
+        <input id="lot-name" type="text" name="lot-name" placeholder="Введите наименование лота" value="<?=$value;?>">
         <span class="form__error">Введите наименование лота</span>
       </div>
       <div class="form__item">
@@ -26,7 +26,7 @@
           $value = isset($lot['message']) ? $lot['mesage'] : ""; ?>
     <div class="form__item form__item--wide <?=$class_name; ?>">
       <label for="message">Описание</label>
-      <textarea id="message" name="message" placeholder="Напишите описание лота" value="<?php $value; ?>" ></textarea>
+      <textarea id="message" name="message" placeholder="Напишите описание лота" value="<?=$value;?>" ></textarea>
       <span class="form__error">Напишите описание лота</span>
     </div>
     <div class="form__item form__item--file"> <!-- form__item--uploaded -->
@@ -62,13 +62,14 @@
       </div>
     </div>
 
-  <?php if (isset($errors)) : ?>
+  <?php if(isset($errors)) : ?>
     <span class="form__error form__error--bottom">Пожалуйста, исправьте ошибки в форме.</span>
     <ul>
       <?php foreach ($errors as $err => $val) : ?>
-        <li><strong><?= $dict[$err]; ?>:</stong> <?= $val; ?></li>
+        <li><strong><?= $dict[$err]; ?>: </strong><?= $val; ?></li>
       <?php endforeach; ?>
     </ul>
   <?php endif; ?>
+
     <button type="submit" class="button">Добавить лот</button>
   </form>
