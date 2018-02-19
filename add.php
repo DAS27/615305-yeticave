@@ -10,11 +10,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $errors = [];
 
     foreach ($required as $key) {
-        if (empty($_POST[$key])) {
-            $errors[$key] = 'Это поле объязательно для заполнения!!!';
+        if(empty($_POST[$key])) {
+            $errors[$key] = 'Это поле надо заполнить!';
         }
     }
-
     if (count($errors)) {
         $page_content = render_template('add', ['lot' => $lot, 'errors' => $errors, 'dict' => $dict]);
     }
