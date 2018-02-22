@@ -2,7 +2,7 @@
 require_once ('config.php'); // Подключает константы
 
 function format_price($price) { // Округляет и форматирует цену
-    $ceil_price=ceil($price);
+    $ceil_price = ceil($price);
 
     if ($ceil_price > 1000) {
         $ceil_price = number_format($ceil_price, 0, '', ' ');
