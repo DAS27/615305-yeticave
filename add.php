@@ -2,76 +2,135 @@
 require_once 'functions.php';
 require_once 'data.php';
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $lot = $_POST;
+define('DAY_IN_SECONDS', 86400);
+define('VALID_IMAGES_FORMAT', ['image/jpeg', 'image/png']);
+define('IMG_PATH', 'img/');
 
-$required = ['lot-name', 'category', 'message', 'lot_img', 'lot-rate', 'lot-step', 'lot-date'];
-$dict = [
-    'lot-name' => 'Наименование',
-    'category' => 'Категория',
-    'message' => 'Описание',
-    'lot_img' => 'Изображение',
-    'lot-rate' => 'Начальная цена',
-    'lot-step' => 'Шаг ставки',
-    'lot-date' => 'Дата окончания торгов'
-];
-$errors = [];
+function get_required_fields() {
+    return [
+        'lot-name',
+        'category',
+        'message',
+        'lot-rate',
+        'lot-step',
+        'lot-date'
+    ];
+}
 
-foreach ($required as $key) {
-    if(empty($_POST[$key])) {
-        $errors[$key] = 'Это поле надо заполнить!';
+function is_correct_lot_rate($lot_rate) {
+    return (is_int($lot_rate) && $lot_rate > 0);
+}
+
+function is_correct_lot_step($lot_step) {
+    return (is_int($lot_step) && $lot_step > 0);
+}
+
+function is_correct_lot_date($lot_date) {
+   return (strtotime($lot_date) - strtotime('now') > 0);
+}
+
+function is_correct_lot_category($category_index) {
+    if ($category_index === -1) return false;
+    // Потом мы добавим проверку
+    return true;
+}
+
+function check_field(string $field_name, $value) {
+    $description = '';
+    $required_fields  = get_required_fields();
+
+    if (in_array($field_name, $required_fields) && empty($value)) {
+        $description = 'Это поле необходимо заполнить';
+        return ['result' => false, 'description' => $description, 'value' => $value];
     }
+
+    if ($field_name === 'lot-rate' && !is_correct_lot_rate((int)$value)) {
+        $description = 'Укажите корректное значение начальной цены в рублях!';
+        return ['result' => false, 'description' => $description, 'value' => $value];
+    }
+
+    if ($field_name === 'lot-step' && !is_correct_lot_step((int)$value)) {
+        $description = 'Укажите корректное значение шага ставки в рублях!';
+        return ['result' => false, 'description' => $description, 'value' => $value];
+    }
+
+    if ($field_name === 'lot-date' && !is_correct_lot_date($value)) {
+        $description = 'Укажите корректное число даты! Дата должна быть больше текущей даты хотя бы на один день!';
+        return ['result' => false, 'description' => $description, 'value' => $value];
+    }
+
+    if ($field_name === 'category' && !is_correct_lot_category((int)$value)) {
+        $description = 'Выберите категорию.';
+        return ['result' => false, 'description' => $description, 'value' => $value];
+    }
+
+    return ['result' => true, 'description' => $description];
 }
 
-if ($value === 'lot-name') {
-     $value = trim($value);
-       if (empty($value)) {
-         $errors [] = "Уберите пробелы";
-   }
-}
+function check_image_field() {
+    $description = '';
 
-if ((!is_int($lot['lot-rate']) && ($lot['lot-rate'] <= 0))) {
-    $errors['lot-rate'] = 'Укажите корректное значение начальной цены в рублях!';
-}
+    if (empty($_FILES['lot-photo']['name'])) {
+        return ['result' => false, 'description' => 'Вы не загрузили изображение', 'image_path' => ''];
+    }
 
-if ((!is_int($lot['lot-step']) && ($lot['lot-step'] <=0 ))) {
-    $errors['lot-step'] = 'Укажите корректное значение шага ставки в рублях!';
-}
-
-if ((strtotime($lot['lot-date']) - strtotime('now')) < 86400) {
-    $errors['lot-date'] = 'Укажите корректное число даты! Дата должна быть больше текущей даты хотя бы на один день!';
-}
-
-if (!empty($_FILES['userfile']['name'])) {
-    $tmp_name = $_FILES['userfile']['tmp_name'];
-    $path = $_FILES['userfile']['name'];
+    $tmp_name = $_FILES['lot-photo']['tmp_name'];
+    $path = $_FILES['lot-photo']['name'];
 
     $finfo = finfo_open(FILEINFO_MIME_TYPE);
     $file_type = finfo_file($finfo, $tmp_name);
 
-    if ($file_type !== "image/jpeg" && $file_type !== "image/png") {
-    $errors['lot_img'] = 'Загрузите изображение лота в формате jpg или png';
+    if (! in_array($file_type, VALID_IMAGES_FORMAT)) {
+        return ['result' => false, 'description' => 'Загрузите изображение лота в формате jpg или png', 'image_path' => ''];
     }
 
-    else {
-    move_uploaded_file($tmp_name, 'img/' . $path);
-    $lot['path'] = $path;
-    }
+    move_uploaded_file($tmp_name, IMG_PATH . $path);
+
+    return ['result' => true, 'description' => '', 'image_path' => IMG_PATH . $path];
 }
 
-else {
-    $errors['lot_img'] = 'Вы не загрузили изображение';
-}
 
-if (count($errors)) {
-    $page_content = render_template('add', ['lot' => $lot, 'errors' => $errors, 'dict' => $dict]);
-}
-else {
-    $page_content = render_template('lot', ['lot' => $lot]);
+$errors = [];
+$dict = [
+    'lot-name' => 'Наименование',
+    'category' => 'Категория',
+    'message' => 'Описание',
+    'lot-photo' => 'Изображение',
+    'lot-rate' => 'Начальная цена',
+    'lot-step' => 'Шаг ставки',
+    'lot-date' => 'Дата окончания торгов'
+];
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+    $required_fields = get_required_fields();
+
+    foreach ($required_fields as $field) {
+        $result = check_field($field, $_POST[$field]);
+
+        if (!$result['result']) {
+            $errors[$field] = $result;
+        }
     }
-}
-else {
-    $page_content = render_template('add', []);
+
+    // Проверка изображения. Выносим для удобства отдельно
+    $result = check_image_field();
+
+    if ($result['result']) {
+        $_POST['lot-photo'] = $result['image_path'];
+    } else {
+        $errors['lot-photo'] = $result;
+    }
+
+
+    if (count($errors)) {
+        $page_content = render_template('add', ['errors' => $errors, 'dict' => $dict, 'categories' => $categories]);
+    } else {
+        $page_content = render_template('lot', ['lot' => $_POST, 'categories' => $categories]);
+    }
+
+} else {
+    $page_content = render_template('add', ['errors' => $errors, 'categories' => $categories]);
 }
 
 $layout_content = render_template('layout',
