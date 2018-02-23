@@ -23,7 +23,7 @@ $page_content = render_template('lot', ['lot' => $lot]);
 
 $layout_content = render_template('layout',
 ['content' => $page_content,
- 'title' => 'YetiCave - Интернет-аукцион для сноубордического и горнолыжного снаряжения.',
+ 'title' => 'YetiCave - Просмотр лота',
  'categories' => $categories,
  'is_auth' => $is_auth,
  'user_name' => $user_name,
