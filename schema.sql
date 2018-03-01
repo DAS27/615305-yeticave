@@ -11,7 +11,7 @@ CREATE TABLE users (
  name VARCHAR(50) NOT NULL,
  avatar VARCHAR(255) NULL,
  contacts VARCHAR (50)
-) ENGINE = InnoDB, CHARACTER SET = UTF8;  
+) ENGINE = InnoDB, CHARACTER SET = UTF8;
 
 CREATE TABLE categories (
  id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
@@ -19,7 +19,7 @@ CREATE TABLE categories (
 ) ENGINE = InnoDB, CHARACTER SET = UTF8;
 
 CREATE TABLE lots (
- id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY, 
+ id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
  title VARCHAR(200) NOT NULL,
  price INT UNSIGNED NOT NULL,
  description TEXT(600) NOT NULL,
@@ -35,7 +35,7 @@ CREATE TABLE lots (
 
  FOREIGN KEY (author_id) REFERENCES users(id)
   ON UPDATE CASCADE,
-  
+
  FOREIGN KEY (winner_id) REFERENCES users(id)
   ON UPDATE CASCADE
 ) ENGINE = InnoDB, CHARACTER SET = UTF8;
@@ -52,10 +52,3 @@ FOREIGN KEY (lot_id) REFERENCES lots(id)
 ON UPDATE CASCADE
 ) ENGINE = InnoDB, CHARACTER SET = UTF8;
 
-insert into categories (name) values
- ('Доски и лыжи'),
- ('Ботинки'),
- ('Одежда'),
- ('Крепления'),
- ('Инструменты'),
- ('Разное')
