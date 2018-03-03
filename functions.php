@@ -18,9 +18,9 @@ function render_template(string $template_name, array $data) { // Подключ
 		require_once(TEMPLATE_DIR_PATH . $template_name . TEMPLATE_EXT);
 		return ob_get_clean();
     }
-
 	return '';
 };
+
 
 function get_lot_time() { // Время жизни лота
     $ts = time();
@@ -40,3 +40,14 @@ function print_var($array, $var_name, $key = '') {
 
     return '';
 }
+
+function cookies_write($name_cookies, $value, $expire, $path) {
+    $history_lot = [];
+    if (isset($_COOKIE[$name_cookies])) {
+        $history_lot = json_decode($_COOKIE[$name_cookies]);
+        if (!in_array($value, $history_lot)) {
+            array_push($history_lot, $value);
+        };
+    }
+    setcookie($name_cookies, json_encode($history_lot), $expire, $path);
+};
