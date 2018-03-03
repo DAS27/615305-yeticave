@@ -11,6 +11,10 @@ $user_name = 'Константин';
 $user_avatar = 'img/user.jpg';
 $categories = ['Доски и лыжи', 'Крепления', 'Ботинки', 'Одежда', 'Инструменты', 'Разное'];
 
+$cookie_path = '/';
+$cookie_live = strtotime("+30 days");
+$cookie_name_id_lot = 'lots_id';
+
 $lots = [
     0 =>
     [   'name' => '2014 Rossignol District Snowboard',

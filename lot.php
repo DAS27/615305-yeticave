@@ -1,4 +1,4 @@
-<?php   
+<?php
 require_once 'functions.php';
 require_once 'data.php';
 
@@ -8,11 +8,12 @@ if (isset($_GET['id'])) {
     $id = $_GET['id'];
     foreach ($lots as $key => $item) {
         if ($key == $id) {
-        
+
             $lot = $item;
         break;
         }
     }
+    cookies_write($cookie_name_id_lot, $id, $cookie_live, $cookie_path);
 }
 
 if ($lot === null) {
