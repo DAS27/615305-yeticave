@@ -8,7 +8,6 @@ if (isset($_GET['id'])) {
     $id = $_GET['id'];
     foreach ($lots as $key => $item) {
         if ($key == $id) {
-
             $lot = $item;
         break;
         }
