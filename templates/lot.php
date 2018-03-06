@@ -6,7 +6,7 @@
         <div class="lot-item__image">
           <img src="<?=$lot['image']; ?>" width="730" height="548" alt="">
         </div>
-        <p class="lot-item__category">Категория: <span><?=$categories[$lot['category']]; ?></span></p>
+        <p class="lot-item__category">Категория: <span><?=$lot['category']; ?></span></p>
         <p class="lot-item__description"><?=print_var($_POST, 'message');?></p>
       </div>
       <div class="lot-item__right">
