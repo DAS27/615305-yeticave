@@ -6,9 +6,21 @@ $bets = [
     ['name' => 'Евгений', 'price' => 10500, 'ts' => strtotime('-' . rand(25, 50) .' hour')],
     ['name' => 'Семён', 'price' => 10000, 'ts' => strtotime('last week')]
 ];
-$is_auth = (bool) rand(0, 1);
-$user_name = 'Константин';
-$user_avatar = 'img/user.jpg';
+
+session_start();
+session_regenerate_id();
+
+if(isset($_SESSION['user']))
+{
+    $is_auth = 1;
+    $user_name = $_SESSION['user']['name'];
+    $user_avatar = 'img/user.jpg';
+} else {
+    $is_auth = 0;
+    $user_name = null;
+    $user_avatar = null;
+}
+
 $categories = ['Доски и лыжи', 'Крепления', 'Ботинки', 'Одежда', 'Инструменты', 'Разное'];
 
 $cookie_path = '/';

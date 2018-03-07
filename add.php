@@ -39,7 +39,7 @@ function check_field(string $field_name, $value) {
     $description = '';
     $required_fields  = get_required_fields();
 
-    if (in_array($field_name, $required_fields) && empty($value)) {
+    if (in_array($field_name, $required_fields) && empty($value) && $value !== "0") {
         $description = 'Это поле необходимо заполнить';
         return ['result' => false, 'description' => $description, 'value' => $value];
     }

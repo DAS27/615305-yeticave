@@ -7,7 +7,7 @@
     <link href="css/style.css" rel="stylesheet">
 </head>
 <body>
- 
+
 <header class="main-header">
     <div class="main-header__container container">
         <h1 class="visually-hidden">YetiCave</h1>
@@ -26,6 +26,7 @@
             </div>
             <div class="user-menu__logged">
                 <p><?=$user_name?></p>
+                <a href="logout.php">Выйти</a>
             </div>
             </div>
         </nav>
@@ -35,7 +36,7 @@
                 <a href="#">Регистрация</a>
             </li>
             <li class="user-menu__item">
-                <a href="#">Вход</a>
+                <a href="/login.php">Вход</a>
             </li>
         </ul>
         <?php endif; ?>
@@ -44,7 +45,7 @@
 <main class="container">
 <?= $content; ?>
 </main>
- 
+
 <footer class="main-footer">
     <nav class="nav">
         <ul class="nav__list container nav__item">
@@ -91,6 +92,6 @@
         </div>
     </div>
 </footer>
- 
+
 </body>
 </html>

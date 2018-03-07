@@ -14,7 +14,7 @@
         <?php endif; ?>
             <label for="lot-name">Наименование</label>
             <input id="lot-name" type="text" name="lot-name" placeholder="Введите наименование лота" value="<?=print_var($_POST, 'lot-name'); ?>"> <!--required-->
-            <span class="form__error"><?print_var($errors, 'lot-name', 'description');?></span>
+            <span class="form__error"><?=print_var($errors, 'lot-name', 'description');?></span>
         </div>
 
 
@@ -41,7 +41,7 @@
                 <?php endif; ?>
             <?php endforeach; ?>
             </select>
-        <span class="form__error"><?print_var($errors, 'category', 'description');?></span>
+        <span class="form__error"><?=print_var($errors, 'category', 'description');?></span>
       </div>
     </div>
 
