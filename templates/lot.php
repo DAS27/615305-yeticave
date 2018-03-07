@@ -6,10 +6,11 @@
         <div class="lot-item__image">
           <img src="<?=$lot['image']; ?>" width="730" height="548" alt="">
         </div>
-        <p class="lot-item__category">Категория: <span><?=$categories[$lot['category']]; ?></span></p>
+        <p class="lot-item__category">Категория: <span><?=$lot['category']; ?></span></p>
         <p class="lot-item__description"><?=print_var($_POST, 'message');?></p>
       </div>
       <div class="lot-item__right">
+        <?php if($is_auth): ?>
         <div class="lot-item__state">
           <div class="lot-item__timer timer">
             10:54:12
@@ -31,6 +32,7 @@
             <button type="submit" class="button">Сделать ставку</button>
           </form>
         </div>
+        <?php endif; ?>
         <div class="history">
           <h3>История ставок (<span>10</span>)</h3>
           <table class="history__list">
