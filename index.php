@@ -7,8 +7,6 @@ $categories = db_get_categories($db_handler);
 
 $page_content = render_template('index', ['lots' => $lots]);
 
-
-
 $layout_content = render_template('layout',
 ['content' => $page_content,
  'title' => 'YetiCave - Интернет-аукцион для сноубордического и горнолыжного снаряжения.',
