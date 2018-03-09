@@ -51,7 +51,7 @@
         <ul class="nav__list container nav__item">
                 <?php foreach ($categories as $category_item): ?>
             <li class="nav__item">
-                <a href="all-lost.html"><?php print($category_item); ?></a>
+                <a href="all-lost.html"><?php print($category_item['categoryName']); ?></a>
             </li>
                 <?php endforeach; ?>
         </ul>
